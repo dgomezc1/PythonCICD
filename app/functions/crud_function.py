@@ -22,3 +22,7 @@ async def update_item(item_id: int, item: Item):
 async def delete_item(item_id: int):
     del items[item_id]
     return {"message" : "Item deleted"}
+
+@app.get("/math")
+async def math_operation():
+    return 2+2
