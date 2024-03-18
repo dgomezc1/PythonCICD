@@ -31,3 +31,6 @@ jobs:
         title: Coverage Report by File
         badge-title: Total Coverage Percent
         junitxml-title: Coverage Report Summary
+    - name: Build Coverage File
+      run: |
+        coverage report --fail-under=75
