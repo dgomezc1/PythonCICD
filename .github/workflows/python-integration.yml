@@ -31,3 +31,11 @@ jobs:
         title: Coverage Report by File
         badge-title: Total Coverage Percent
         junitxml-title: Coverage Report Summary
+    - name: Build Coverage File
+      run: |
+        COVERAGE=$(awk '/^TOTAL\s*\d*\s*\d*\s*([\d.]+)/ { print substr($4, 1, length($4)-1) }' pytest-coverage.txt)
+        echo COVERAGE
+        if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+          echo "Coverage is below 80% threshold. Failing pipeline."
+          exit 1
+        fi
