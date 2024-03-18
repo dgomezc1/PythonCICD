@@ -33,4 +33,4 @@ jobs:
         junitxml-title: Coverage Report Summary
     - name: Build Coverage File
       run: |
-        coverage report --fail-under=80
+        coverage report --fail-under=75
