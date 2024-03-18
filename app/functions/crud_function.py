@@ -1,6 +1,6 @@
-from main import app
+from app.main import app
 from typing import List
-from entities.models.model import Item
+from app.entities.models.model import Item
 
 items = [{"name": "santi", "id": 1, "email": "santii@gmail.com"}]
 
