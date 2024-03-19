@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.12
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.12"
     - name: Install dependencies
@@ -54,7 +54,7 @@ jobs:
     - name: Add App to Zipfile
       run: cd ./app && zip -g ../api.zip -r .
     - name: Upload zip file artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: api
         path: api.zip
