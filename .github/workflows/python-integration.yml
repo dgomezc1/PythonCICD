@@ -49,7 +49,7 @@ jobs:
         . venv/bin/activate && coverage report --fail-under=75
     - name: Create Zip with Dependencies
       run: |
-        cd ./venv/lib/python3.7/site-packages
+        cd ./venv/lib/python3.12/site-packages
         zip -r9 ../../../../api.zip .
     - name: Add App to Zipfile
       run: cd ./app && zip -g ../api.zip -r .
