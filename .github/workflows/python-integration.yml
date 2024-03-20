@@ -34,7 +34,7 @@ jobs:
         pip install -r requirements.txt
       if: steps.cache-venv.outputs.cache-hit != 'true'
     - name: Build Coverage File
-      run: . venv/bin/activate && pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
+      run: . venv/bin/activate && pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=src tests/ | tee pytest-coverage.txt
     - name: Pytest coverage comment
       uses: MishaKav/pytest-coverage-comment@main
       with:
@@ -52,7 +52,7 @@ jobs:
         cd ./venv/lib/python3.12/site-packages
         zip -r9 ../../../../api.zip .
     - name: Add App to Zipfile
-      run: cd ./app && zip -g ../api.zip -r .
+      run: cd ./src && zip -g ../api.zip -r .
     - name: Upload zip file artifact
       uses: actions/upload-artifact@v4
       with:
