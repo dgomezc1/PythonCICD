@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
   pull_request:
-    branches: ["main"]
+    branches: '*'
 
 permissions:
   contents: read
@@ -63,8 +63,8 @@ jobs:
 
   continuous-deployment:
     runs-on: ubuntu-latest
-    needs: [build]
-    if: github.event == 'push'
+    needs: build
+    if: github.event_name == 'push'
     steps:
       
       - name: Install AWS CLI
