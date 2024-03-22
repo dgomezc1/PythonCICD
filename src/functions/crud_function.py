@@ -16,7 +16,7 @@ async def read_item():
 
 @router.post("/items", response_model=Item)
 async def create_item(item: Item):
-    items.routerend(item)
+    items.append(item)
     return item
 
 @router.put("/items/{item_id}", response_model=Item)
