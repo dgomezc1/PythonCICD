@@ -1,28 +1,39 @@
-from src.main import app
+from fastapi import APIRouter, status
 from typing import List
+from mangum import Mangum
+# Project Imports
 from src.entities.schemas.api_schema import Item
+from src.main import main_router, app
 
 items = [{"name": "santi", "id": 1, "email": "santii@gmail.com"}]
 
-@app.get("/items", response_model=List[Item])
+router = APIRouter(prefix="/users")
+
+
+@router.get("/items", response_model=List[Item])
 async def read_item():
     return items
 
-@app.post("/items", response_model=Item)
+@router.post("/items", response_model=Item)
 async def create_item(item: Item):
-    items.append(item)
+    items.routerend(item)
     return item
 
-@app.put("/items/{item_id}", response_model=Item)
+@router.put("/items/{item_id}", response_model=Item)
 async def update_item(item_id: int, item: Item):
     items[item_id] = item
     return item
 
-@app.delete("/items/{item_ud}")
+@router.delete("/items/{item_ud}")
 async def delete_item(item_id: int):
     del items[item_id]
     return {"message" : "Item deleted"}
 
-@app.get("/math")
+@router.get("/math")
 async def math_operation():
     return 2+2
+
+main_router.include_router(router)
+app.include_router(main_router)
+
+handler = Mangum(app=app)
