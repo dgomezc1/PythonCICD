@@ -18,7 +18,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
-    - name: Install dependencies
+    - name: Install pip
       run: |
           python -m pip install --upgrade pip
     - name: Install Python Virtual Env
@@ -46,7 +46,7 @@ jobs:
         title: Coverage Report by File
         badge-title: Total Coverage Percent
         junitxml-title: Coverage Report Summary
-    - name: Build Coverage File
+    - name: Check coverage percent
       run: |
         . venv/bin/activate && coverage report --fail-under=1
 
@@ -60,7 +60,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
-    - name: Install dependencies
+    - name: Install pip
       run: |
           python -m pip install --upgrade pip
     - name: Install Python Virtual Env
@@ -81,9 +81,9 @@ jobs:
       run: |
         cd ./venv/lib/python3.12/site-packages
         zip -r9 ../../../../api.zip .
-    - name: Add App to Zipfile
+    - name: Add Src to Zipfile
       run: zip -g api.zip -r src/
-    - name: Upload zip file artifact
+    - name: Store zip file artifact
       uses: actions/upload-artifact@v4
       with:
         name: api
@@ -107,7 +107,7 @@ jobs:
         with:
           name: api
       
-      - name: Upload to S3
+      - name: Upload zip to S3
         run: aws s3 cp api.zip s3://pythoncd-ci/api.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
