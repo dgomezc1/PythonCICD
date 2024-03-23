@@ -5,7 +5,7 @@ from src.functions.crud_function import app
 client = TestClient(app)
 
 def test_read_items():
-    response = client.get("/items")
+    response = client.get("/api/v1/users/items")
     assert response.status_code == 200
     assert response.json() == [{
             "name": "santi",

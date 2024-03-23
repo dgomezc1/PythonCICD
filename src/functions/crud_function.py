@@ -24,14 +24,14 @@ async def update_item(item_id: int, item: Item):
     items[item_id] = item
     return item
 
-@router.delete("/items/{item_ud}")
+@router.delete("/items/{item_id}")
 async def delete_item(item_id: int):
     del items[item_id]
     return {"message" : "Item deleted"}
 
-@router.get("/math")
-async def math_operation():
-    return 2+2
+@router.get("/math/{num}")
+async def math_operation(num: int):
+    return num*num
 
 main_router.include_router(router)
 app.include_router(main_router)
