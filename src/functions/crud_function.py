@@ -4,10 +4,19 @@ from mangum import Mangum
 # Project Imports
 from src.entities.schemas.api_schema import Item
 from src.main import main_router, app
+from fastapi.middleware.cors import CORSMiddleware
 
 items = [{"name": "santi", "id": 1, "email": "santii@gmail.com"}]
 
 router = APIRouter(prefix="/users")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @router.get("/items", response_model=List[Item])
@@ -31,7 +40,7 @@ async def delete_item(item_id: int):
 
 @router.get("/math/{num}")
 async def math_operation(num: int):
-    return num+num
+    return num*num
 
 main_router.include_router(router)
 app.include_router(main_router)
