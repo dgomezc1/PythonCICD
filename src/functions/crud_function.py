@@ -31,7 +31,7 @@ async def delete_item(item_id: int):
 
 @router.get("/math/{num}")
 async def math_operation(num: int):
-    return num+num
+    return num*num
 
 main_router.include_router(router)
 app.include_router(main_router)
